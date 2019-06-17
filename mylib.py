@@ -1,4 +1,5 @@
 def fibonacci(limit):
+    """Print all fibonacci numbers until <limit>"""
     current = 1
     previous = 0
     while current < limit:
@@ -7,31 +8,28 @@ def fibonacci(limit):
 
 
 def squares(limit):
+    """Print all squares of whole numbers until <limit>"""
     for num in range(1, limit + 1):
         yield num ** 2
 
 
 def print_all(values):
+    """Print all values in list,as string, with values separated by commas"""
     print(", ".join(map(str, [val for val in values])))
 
 
-def list_to_string(values):
-    return "".join(values)
-
-
-def iterator_to_list(iterator):
-    return [value for value in iterator]
-
-
 def camel_case(string):
+    """Converts a string to camel-case lettering"""
     return " ".join(["".join([x.upper() if word.index(x) == 0 else x for x in word]) for word in string.split()])
 
 
 def filter_list(iterable, *args):
+    """Filters a list for values in <*args>"""
     return [val for val in iterable if val not in [*args]]
 
 
 def caesar_shift(string, shift, mode):
+    """Encrypts/decrypts <string> with a caesar shift, the shift being <shift>"""
     alphabet = [chr(x) for x in range(97, 123)]
     shifted_alphabet = alphabet[(shift % 26):] + alphabet[:(shift % 26)]
     return "".join([(shifted_alphabet[alphabet.index(x)] if mode == "encrypt" else alphabet[shifted_alphabet.index(x)])
@@ -39,7 +37,7 @@ def caesar_shift(string, shift, mode):
 
 
 def substitution_cipher(string, seed, mode):
-    """Encrypts text by substitution with shuffled alphabet"""
+    """Encrypts/decrypts text by substitution with shuffled alphabet"""
     import random
     alphabet = [chr(x) for x in range(97, 122)]
     shuffled_alphabet = list(alphabet)
@@ -47,11 +45,11 @@ def substitution_cipher(string, seed, mode):
     random.shuffle(shuffled_alphabet)
     random.seed()
     if mode == "encrypt":
-        string = list_to_string([x + chr(random.randint(97, 122)) for x in string])
+        string = "".join([x + chr(random.randint(97, 122)) for x in string])
         string = string[::-1]
-        string = list_to_string([shuffled_alphabet[alphabet.index(x)] if x in alphabet else x for x in string])
+        string = "".join([shuffled_alphabet[alphabet.index(x)] if x in alphabet else x for x in string])
     else:
-        string = list_to_string([alphabet[shuffled_alphabet.index(x)] if x in alphabet else x for x in string])
+        string = "".join([alphabet[shuffled_alphabet.index(x)] if x in alphabet else x for x in string])
         string = string[::-1]
         string = string[::2]
     return string
