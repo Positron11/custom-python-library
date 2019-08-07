@@ -115,4 +115,5 @@ def remove_duplicates(values):
 
 
 def modal_value(values):
+    """Finds the modal value(s) in a set of data"""
     return [x for x in remove_duplicates(values) if values.count(x) == max([values.count(y) for y in remove_duplicates(values)])]
